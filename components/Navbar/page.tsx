@@ -4,12 +4,12 @@ import PP from "@/public/images/Nolin.jpg"
 
 export default function Navbar() {
   return (
-    <>
+    <div>
       {/* Navbar */}
       <div className="w-full h-24 flex items-center justify-between px-12 bg-white text-black fixed top-0 left-0 z-[1]">
         {/* Logo Section */}
         <div className="font-semibold">
-          <p className="text-2xl">WP Merch.</p>
+          <div className="text-2xl">WP Merch.</div>
         </div>
         {/* Menu Section */}
         <div className="flex gap-8 font-semibold">
@@ -54,7 +54,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      {/* End Navbar */}
-    </>
+    </div>
   );
 }

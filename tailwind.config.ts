@@ -12,6 +12,7 @@ export default {
         'F6F7F9' : '#F6F7F9',
         '616161' : '#616161',
         'E4252C' : '#E4252C',
+        'BC2B30' : '#BC2B30',
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
