@@ -2,6 +2,10 @@ import Image from "next/image";
 import { ReactNode } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/page";
+import Search from "./search";
+import { IMenu } from "../types";
+import { getCookies } from "@/lib/server-cookie";
+import { BASE_API_URL, BASE_IMAGE_PRODUK } from "@/global";
 
 import jersey from "@/public/images/jersey.png";
 import jersey1 from "@/public/images/jersey1.png";
@@ -25,7 +29,37 @@ type ManagerProp = {
   menuList: MenuType[];
 };
 
-export default function Home() {
+interface MenuResponse {
+  status: boolean;
+  data: {
+    status: boolean;
+    data: IMenu[];
+    message: string;
+  };
+}
+
+const getMenu = async (search: string): Promise<IMenu[]> => {
+  try {
+    const TOKEN = await getCookies("token");
+    const url = `${BASE_API_URL}/menu?search=${search}`;
+    const response = (await get(url, TOKEN)) as MenuResponse;
+
+    if (response?.data?.data && Array.isArray(response.data.data)) {
+      return response.data.data;
+    }
+    console.error("Unexpected response structure:", response);
+    return [];
+  } catch (error) {
+    console.error("Error fetching menu:", error);
+    return [];
+  }
+};
+
+const Home = async ({ searchParams, }: { searchParams: { [key: string]: string | string[] | undefined };}) => {
+
+  const search = searchParams.search ? searchParams.search.toString() : ``;
+  const menu: IMenu[] = await getMenu(search);
+  
   return (
     <div className="flex flex-col h-full bg-white">
       <Navbar></Navbar>
@@ -214,3 +248,8 @@ export default function Home() {
     </div>
   );
 }
+function get(url: string, TOKEN: string): MenuResponse | PromiseLike<MenuResponse> {
+  throw new Error("Function not implemented.");
+}
+
+export default Home;
