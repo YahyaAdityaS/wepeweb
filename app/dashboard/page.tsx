@@ -14,6 +14,7 @@ import gantungan from "@/public/images/gantungan.png";
 import stiker from "@/public/images/stiker.png";
 import Ig from "@/public/images/instagram.png";
 import Wa from "@/public/images/whatsapp.png";
+import { get } from "@/lib/api-bridge";
 
 type MenuType = {
   id: string;
@@ -42,7 +43,7 @@ const getMenu = async (search: string): Promise<IMenu[]> => {
   try {
     const TOKEN = await getCookies("token");
     const url = `${BASE_API_URL}/menu?search=${search}`;
-    const response = (await get(url, TOKEN)) as MenuResponse;
+    const response = await get(url, TOKEN) as MenuResponse; // Tidak perlu casting manual
 
     if (response?.data?.data && Array.isArray(response.data.data)) {
       return response.data.data;
@@ -54,6 +55,7 @@ const getMenu = async (search: string): Promise<IMenu[]> => {
     return [];
   }
 };
+
 
 const Home = async ({ searchParams, }: { searchParams: { [key: string]: string | string[] | undefined };}) => {
 
@@ -247,9 +249,6 @@ const Home = async ({ searchParams, }: { searchParams: { [key: string]: string |
       </footer>
     </div>
   );
-}
-function get(url: string, TOKEN: string): MenuResponse | PromiseLike<MenuResponse> {
-  throw new Error("Function not implemented.");
 }
 
 export default Home;
