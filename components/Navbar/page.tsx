@@ -1,8 +1,15 @@
+"use client"; // Penting jika kamu pakai app directory
+
 import Link from "next/link";
 import Image from "next/image";
-import PP from "@/public/images/Nolin.jpg"
+import { usePathname } from "next/navigation";
+import PP from "@/public/images/Nolin.jpg";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => pathname === path;
+
   return (
     <div>
       {/* Navbar */}
@@ -13,10 +20,22 @@ export default function Navbar() {
         </div>
         {/* Menu Section */}
         <div className="flex gap-8 font-semibold">
-          <Link href={"/"} className="hover:text-E4252C">
+          <Link
+            href="/dashboard"
+            className={`${isActive("/dashboard") ? "text-[#E4252C]" : "hover:text-[#E4252C]"}`}
+          >
+            Dashboard
+          </Link>
+          <Link
+            href="/product"
+            className={`${isActive("/product") ? "text-[#E4252C]" : "hover:text-[#E4252C]"}`}
+          >
             Product
           </Link>
-          <Link href={"/"} className="hover:text-E4252C">
+          <Link
+            href="/aboutus"
+            className={`${isActive("/aboutus") ? "text-[#E4252C]" : "hover:text-[#E4252C]"}`}
+          >
             About Us
           </Link>
         </div>
@@ -40,7 +59,13 @@ export default function Navbar() {
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 
+                  1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 
+                  1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 
+                  1 5.513 7.5h12.974c.576 0 1.059.435 
+                  1.119 1.007ZM8.625 10.5a.375.375 0 1 
+                  1-.75 0 .375.375 0 0 1 .75 0Zm7.5 
+                  0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
               />
             </svg>
           </button>

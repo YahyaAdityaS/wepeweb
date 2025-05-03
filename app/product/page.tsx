@@ -10,7 +10,7 @@ export default function Product() {
   return (
     <div className="flex flex-col h-full w-full bg-white">
         <Navbar></Navbar>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8 pt-40">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 p-8 pt-24">
         {/* KIRI: Gambar Produk */}
         <div className="flex flex-col items-center">
           <Image src={image} alt="jersey" className="size-80 h-auto"></Image>

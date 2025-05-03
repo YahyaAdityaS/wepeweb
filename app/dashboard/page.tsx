@@ -43,12 +43,21 @@ const getMenu = async (search: string): Promise<IMenu[]> => {
   try {
     const TOKEN = await getCookies("token");
     const url = `${BASE_API_URL}/menu?search=${search}`;
-    const response = await get(url, TOKEN) as MenuResponse; // Tidak perlu casting manual
+    const response = await get(url, TOKEN); // Jangan pakai `as MenuResponse` agar bisa validasi manual
 
-    if (response?.data?.data && Array.isArray(response.data.data)) {
+    if (
+      response &&
+      typeof response === "object" &&
+      "data" in response &&
+      response.data &&
+      typeof response.data === "object" &&
+      "data" in response.data &&
+      Array.isArray(response.data.data)
+    ) {
       return response.data.data;
     }
-    console.error("Unexpected response structure:", response);
+
+    console.warn("Unexpected response structure:", JSON.stringify(response));
     return [];
   } catch (error) {
     console.error("Error fetching menu:", error);
@@ -234,7 +243,7 @@ const Home = async ({ searchParams, }: { searchParams: { [key: string]: string |
           </div>
         </div>
         <div className="flex gap-x-4 mb-20">
-          <a href="https://instagram.com">
+          <a href="https://www.instagram.com/wepe_merch/">
             <Image src={Ig} alt="ig" className="size-10 mt-3"></Image>
           </a>
           <a href="">
