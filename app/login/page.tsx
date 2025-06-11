@@ -51,7 +51,7 @@ const LoginPage = () => {
           setTimeout(() => router.replace(`/dashboard`), 1000);
         }
         if (role == "ADMIN") {
-          setTimeout(() => router.replace(`/admin`), 1000);
+          setTimeout(() => router.replace(`/admin/menu`), 1000);
         }
       } else
         toast(data.message, {

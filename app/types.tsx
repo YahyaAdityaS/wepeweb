@@ -1,11 +1,12 @@
 export interface IMenu {
     id: number,
     uuid: string,
-    name: string,
-    price: number,
-    picture: string,
-    description: string,
-    category: string,
+    nama: string,
+    harga: number,
+    foto: string,
+    deskripsi: string,
+    kategori: string,
+    stok: number,
     createdAt: string,
     updatedAt: string,
     massager: string
