@@ -2,8 +2,12 @@
 import LeftImage from "@/components/LeftImage/page";
 import { FormEvent, useState } from "react";
 import axios from "axios"; // Tambahkan import axios
+import { useRouter } from "next/navigation";
 
 const Register = () => {
+
+  const router = useRouter();
+  
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,6 +31,7 @@ const Register = () => {
     try {
       const response = await axios.post("http://localhost:4000/user/register", formData);
       setSuccess("Pendaftaran berhasil! Silakan login.");
+      setTimeout(() => { router.push("/login"); }, 1500);
       setFormData({
         email: "",
         password: "",

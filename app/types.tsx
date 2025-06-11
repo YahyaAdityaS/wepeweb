@@ -11,3 +11,4 @@ export interface IMenu {
     updatedAt: string,
     massager: string
 }
+
